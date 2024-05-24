@@ -15,9 +15,9 @@ TODO:
 
 #### I am standing on the shoulders of giants, namely:
 
-The whole [Adafruit/CircuitPython team and community](https://circuitpython.org/)
-[JoystickXL](https://github.com/fasteddy516/CircuitPython_JoystickXL/blob/main/joystick_xl/hid.py)
-[imrehg](https://github.com/imrehg/arduino-usb-phone-hid)
+- The whole [Adafruit/CircuitPython team and community](https://circuitpython.org/)
+- [JoystickXL](https://github.com/fasteddy516/CircuitPython_JoystickXL/blob/main/joystick_xl/hid.py)
+- [imrehg](https://github.com/imrehg/arduino-usb-phone-hid)
 
 and they have my gratitude.
 
