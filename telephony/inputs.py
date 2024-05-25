@@ -1,8 +1,8 @@
 """
-Classes to simplify mapping GPIO pins and values to JoystickXL inputs and states.
+Classes to simplify mapping GPIO pins and values to ButtonXL inputs and states.
 
 This module provides a set of classes to aid in configuring GPIO pins and convert
-their raw states to values that are usable by JoystickXL.
+their raw states to values that are usable by ButtonXL.
 """
 
 # These typing imports help during development in vscode but fail in CircuitPython
@@ -45,7 +45,7 @@ class Button:
 
             Accessing this property also updates the ``.was_pressed`` and
             ``.was_released`` logic, which means accessing ``.value`` directly anywhere
-            other than in a call to ``Joystick.update_button()`` can make those
+            other than in a call to ``Telephony.update_button()`` can make those
             properties unreliable.  If you need to read the current state of a button
             anywhere else in your input processing loop, you should be using
             ``.is_pressed`` or ``.is_released`` rather than ``.value``.
@@ -90,8 +90,8 @@ class Button:
 
             This property only works reliably when ``Button.value`` is accessed *once
             per iteration of your input processing loop*.  If your code uses the
-            built-in ``Joystick.add_input()`` method and associated input lists along
-            with a single call to ``Joystick.update()``, you should be fine.
+            built-in ``Telephony.add_input()`` method and associated input lists along
+            with a single call to ``Telephony.update()``, you should be fine.
 
         :return: ``True`` if the button was just pressed, ``False`` otherwise.
         :rtype: bool
@@ -110,8 +110,8 @@ class Button:
 
             This property only works reliably when ``Button.value`` is accessed *once
             per iteration of your input processing loop*.  If your code uses the
-            built-in ``Joystick.add_input()`` method and associated input lists along
-            with a single call to ``Joystick.update()``, you should be fine.
+            built-in ``Telephony.add_input()`` method and associated input lists along
+            with a single call to ``Telephony.update()``, you should be fine.
 
         :return: ``True`` if the button was just released, ``False`` otherwise.
         :rtype: bool

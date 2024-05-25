@@ -10,7 +10,7 @@ import usb_hid  # type: ignore (this is a CircuitPython built-in)
 from telephony import __version__
 
 
-def create_joystick(
+def create_telephony(
     buttons: int = 16,
     report_id: int = 0x0b,
 ) -> usb_hid.Device:
@@ -19,8 +19,8 @@ def create_joystick(
 
     .. note::
 
-        JoystickXL will add an entry to the ``boot_out.txt`` file on your ``CIRCUITPY``
-        drive.  It is used by the ``Joystick`` module to retrieve configuration
+        ButtonXL will add an entry to the ``boot_out.txt`` file on your ``CIRCUITPY``
+        drive.  It is used by the ``Telephony`` module to retrieve configuration
         settings.
 
     :param axes: The number of axes to support, from 0 to 8.  (Default is 4)
@@ -31,7 +31,7 @@ def create_joystick(
     :type hats: int, optional
     :param report_id: The USB HID report ID number to use.  (Default is 4)
     :type report_d: int, optional
-    :return: A ``usb_hid.Device`` object with a descriptor identifying it as a joystick
+    :return: A ``usb_hid.Device`` object with a descriptor identifying it as a telephony
         with the specified number of buttons, axes and hat switches.
     :rtype: ``usb_hid.Device``
 
@@ -51,7 +51,7 @@ def create_joystick(
     # fmt: off
     _descriptor = bytearray((
         0x05, 0x0b,                         # : USAGE_PAGE (Generic Desktop)
-        0x09, 0x05,                         # : USAGE (Joystick)
+        0x09, 0x05,                         # : USAGE (Telephony)
         0xA1, 0x01,                         # : COLLECTION (Application)
         0x85, report_id,                    # :   REPORT_ID (Default is 4)
     ))
@@ -102,7 +102,7 @@ def create_joystick(
 
     # write configuration data to boot.out using 'print'
     print(
-        "+ Enabled JoystickXL",
+        "+ Enabled ButtonXL",
         __version__,
         _num_buttons,
         "buttons",
@@ -121,7 +121,7 @@ def create_joystick(
 
 
 def _get_device() -> usb_hid.Device:
-    """Find a JoystickXL device in the list of active USB HID devices."""
+    """Find a ButtonXL device in the list of active USB HID devices."""
     for device in usb_hid.devices:
         if (
             device.usage_page == 0x0b
@@ -129,4 +129,4 @@ def _get_device() -> usb_hid.Device:
             and hasattr(device, "send_report")
         ):
             return device
-    raise ValueError("Could not find JoystickXL HID device - check boot.py.)")
+    raise ValueError("Could not find ButtonXL HID device - check boot.py.)")

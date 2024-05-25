@@ -1,7 +1,7 @@
 """
-The base JoystickXL class for updating input states and sending USB HID reports.
+The base ButtonXL class for updating input states and sending USB HID reports.
 
-This module provides the necessary functions to create a JoystickXL object,
+This module provides the necessary functions to create a ButtonXL object,
 retrieve its input counts, associate input objects and update its input states.
 """
 
@@ -18,15 +18,15 @@ from telephony.hid import _get_device
 from telephony.inputs import Button
 
 
-class Joystick:
-    """Base JoystickXL class for updating input states and sending USB HID reports."""
+class Telephony:
+    """Base ButtonXL class for updating input states and sending USB HID reports."""
 
 
     _num_buttons = 0
-    """The number of buttons this joystick can support."""
+    """The number of buttons this telephony can support."""
 
     _report_size = 0
-    """The size (in bytes) of USB HID reports for this joystick."""
+    """The size (in bytes) of USB HID reports for this telephony."""
 
 
 
@@ -38,33 +38,33 @@ class Joystick:
 
     def __init__(self) -> None:
         """
-        Create a JoystickXL object with all inputs in idle states.
+        Create a ButtonXL object with all inputs in idle states.
 
         .. code::
 
-           from joystick_xl.joystick import Joystick
+           from button_xl.telephony import Telephony
 
-           js = Joystick()
+           js = Telephony()
 
-        .. note:: A JoystickXL ``usb_hid.Device`` object has to be created in
-           ``boot.py`` before creating a ``Joystick()`` object in ``code.py``,
+        .. note:: A ButtonXL ``usb_hid.Device`` object has to be created in
+           ``boot.py`` before creating a ``Telephony()`` object in ``code.py``,
            otherwise an exception will be thrown.
         """
         # load configuration from ``boot_out.txt``
         try:
             with open("/boot_out.txt", "r") as boot_out:
                 for line in boot_out.readlines():
-                    if "JoystickXL" in line:
+                    if "ButtonXL" in line:
                         config = [int(s) for s in line.split() if s.isdigit()]
                         if len(config) < 2:
                             raise (ValueError)
-                        Joystick._num_buttons = config[0]
-                        Joystick._report_size = config[1]
+                        Telephony._num_buttons = config[0]
+                        Telephony._report_size = config[1]
                         break
-            if Joystick._report_size == 0:
+            if Telephony._report_size == 0:
                 raise (ValueError)
 #        except (OSError, ValueError):
-#            raise (Exception("Error loading JoystickXL configuration."))
+#            raise (Exception("Error loading ButtonXL configuration."))
         finally:
             pass
 
@@ -76,7 +76,7 @@ class Joystick:
 
 
         self.button = list()
-        """List of button inputs associated with this joystick through ``add_input``."""
+        """List of button inputs associated with this telephony through ``add_input``."""
 
         self._button_states = list()
         for _ in range((self.num_buttons // 8) + bool(self.num_buttons % 8)):
@@ -97,26 +97,26 @@ class Joystick:
 
         :param button: The 0-based index of the button to validate.
         :type button: int
-        :raises ValueError: No buttons are configured for the JoystickXL device.
+        :raises ValueError: No buttons are configured for the ButtonXL device.
         :raises ValueError: The supplied button index is out of range.
         :return: ``True`` if the supplied button index is valid.
         :rtype: bool
         """
-        if Joystick._num_buttons == 0:
+        if Telephony._num_buttons == 0:
             raise ValueError("There are no buttons configured.")
-        if not 0 <= button <= Joystick._num_buttons - 1:
+        if not 0 <= button <= Telephony._num_buttons - 1:
             raise ValueError("Specified button is out of range.")
         return True
 
 
     def add_input(self, *input: Union[Button]) -> None:
         """
-        Associate one or more axis, button or hat inputs with the joystick.
+        Associate one or more axis, button or hat inputs with the telephony.
 
         The provided input(s) are automatically added to the ``axis``, ``button`` and
         ``hat`` lists based on their type.  The order in which inputs are added will
         determine their index/reference number. (i.e., the first button object that is
-        added will be ``Joystick.button[0]``.)  Inputs of all types can be added at the
+        added will be ``Telephony.button[0]``.)  Inputs of all types can be added at the
         same time and will be sorted into the correct list.
 
         :param input: One or more ``Axis``, ``Button`` or ``Hat`` objects.
@@ -202,8 +202,8 @@ class Joystick:
         :type defer: bool
         :param skip_validation: When ``True``, bypasses the normal input number/value
            validation that occurs before they get processed.  This is used for *known
-           good values* that are generated using the ``Joystick.axis[]``,
-           ``Joystick.button[]`` and ``Joystick.hat[]`` lists.  Defaults to ``False``.
+           good values* that are generated using the ``Telephony.axis[]``,
+           ``Telephony.button[]`` and ``Telephony.hat[]`` lists.  Defaults to ``False``.
         :type skip_validation: bool
 
         .. code::
@@ -217,7 +217,7 @@ class Joystick:
         .. note::
 
            ``update_button`` is called automatically for any button objects added to the
-           built in ``Joystick.button[]`` list when ``Joystick.update()`` is called.
+           built in ``Telephony.button[]`` list when ``Telephony.update()`` is called.
         """
         for b, value in button:
             if skip_validation or self._validate_button_number(b):

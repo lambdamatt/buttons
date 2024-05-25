@@ -1,5 +1,5 @@
 """
-JoystickXL USB HID library for CircuitPython.
+ButtonXL USB HID library for CircuitPython.
 
 Create extra large (high input count) USB HID control devices with CircuitPython.
 
