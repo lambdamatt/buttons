@@ -38,3 +38,5 @@ Helpful tools:
 IDE: [Thonny](https://thonny.org/)
 
 HID I/O debugging: [hidviz](https://github.com/hidviz/hidviz) 
+
+https://docs.kernel.org/hid/hidintro.html
