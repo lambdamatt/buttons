@@ -21,4 +21,10 @@ The whole [Adafruit/CircuitPython team and community](https://circuitpython.org/
 
 and they have my gratitude.
 
-#### This codebase is extremely unstable, and if I stick with it, will change constantly. 
+#### This codebase is extremely unstable, and if I stick with it, will change constantly.
+
+Helpful tools:
+
+IDE: [Thonny](https://thonny.org/)
+
+HID I/O debugging: [hidviz](https://github.com/hidviz/hidviz) 
