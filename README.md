@@ -40,3 +40,11 @@ IDE: [Thonny](https://thonny.org/)
 HID I/O debugging: [hidviz](https://github.com/hidviz/hidviz) 
 
 https://docs.kernel.org/hid/hidintro.html
+
+
+#### A couple of notes:
+`boot.py` is a blessed filename that runs very early in the boot process. This is used to do lower level things like setting the USB modes etc. 
+our `boot.py` gets all of the things in place to have this run as a USB HID with the correct report descriptor for telephony
+`thing.py` is a development kludge. Typically, the auto-executing script would go in a blessed file calle `code.py` (`main.py` also works) but I don't want the script to auto-exec because REPL. There is probably a better/more correct way to do this but this is what is working for me
+
+REF: [circuitpythondocs](https://docs.circuitpython.org/en/latest/README.html#behavior)
