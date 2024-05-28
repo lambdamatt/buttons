@@ -16,6 +16,7 @@ Currently Mute is implemented but there is cruft all over the place and most of 
 TODO:
 - [x] make mute work
 - [x] instantiate a public repo
+- [ ] add and document `yeet`
 - [ ] refactor, clean up and streamline
 - [ ] add additional functionality like `hang up` and `mute status led`
 
@@ -48,3 +49,13 @@ our `boot.py` gets all of the things in place to have this run as a USB HID with
 `thing.py` is a development kludge. Typically, the auto-executing script would go in a blessed file calle `code.py` (`main.py` also works) but I don't want the script to auto-exec because REPL. There is probably a better/more correct way to do this but this is what is working for me
 
 REF: [circuitpythondocs](https://docs.circuitpython.org/en/latest/README.html#behavior)
+
+
+This `boot.py` file sets 2 buttons. JoystickXL automatically sets up the report descriptors based on the number of buttons your device has. The actual digital pins are then setup in `input.py`, in this case `GP4` & `GP5`. Each board names their pins slightly differently. I am using a [Waveshare RP2040 Zero](https://circuitpython.org/board/waveshare_rp2040_zero/). If you are using a different board, you can get your pin's names via the `board` module.  e.g.
+
+```
+>>> import board
+>>> dir(board)
+['__class__', '__name__', 'A0', 'A1', 'A2', 'A3', 'GP0', 'GP1', 'GP10', 'GP11', 'GP12', 'GP13', 'GP14', 'GP15', 'GP16', 'GP17', 'GP18', 'GP19', 'GP2', 'GP20', 'GP21', 'GP22', 'GP23', 'GP24', 'GP25', 'GP26', 'GP26_A0', 'GP27', 'GP27_A1', 'GP28', 'GP28_A2', 'GP29', 'GP29_A3', 'GP3', 'GP4', 'GP5', 'GP6', 'GP7', 'GP8', 'GP9', 'NEOPIXEL', 'RX', 'TX', 'UART', '__dict__', 'board_id']
+>>> 
+```
